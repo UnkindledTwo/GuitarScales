@@ -15,9 +15,16 @@
 enum ScaleType {
     Major,
     Minor,
+    MelodicMinor,
     PentatonicMinor,
     PentatonicMajor,
-    Chromatic
+    Diminished,
+    Phrygian,
+    Lydian,
+    LydianMinor,
+    LydianAugmented,
+    LydianDiminished,
+    Chromatic,
 };
 
 class GuitarWidget : public QWidget

@@ -28,8 +28,15 @@ void GuitarScales::on_bSet_clicked()
     QString strType = ui->cbMode->currentText();
     if(strType == "Major") type = ScaleType::Major;
     else if(strType == "Minor") type = ScaleType::Minor;
+    else if(strType == "Melodic Minor") type = ScaleType::MelodicMinor;
     else if(strType == "Pentatonic Major") type = ScaleType::PentatonicMajor;
     else if(strType == "Pentatonic Minor") type = ScaleType::PentatonicMinor;
+    else if(strType == "Diminished") type = ScaleType::Diminished;
+    else if(strType == "Phrygian") type = ScaleType::Phrygian;
+    else if(strType == "Lydian") type = ScaleType::Lydian;
+    else if(strType == "Lydian Augmented") type = ScaleType::LydianAugmented;
+    else if(strType == "Lydian Minor") type = ScaleType::LydianMinor;
+    else if(strType == "Lydian Diminished") type = ScaleType::LydianDiminished;
     else if(strType == "Chromatic") type = ScaleType::Chromatic;
 
     note = ui->cbNote->currentText();

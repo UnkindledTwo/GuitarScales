@@ -12,12 +12,15 @@ SOURCES += \
     colorpickerdialog.cpp \
     guitarwidget.cpp \
     main.cpp \
-    guitarscales.cpp
+    guitarscales.cpp \
+    scalefilereader.cpp
 
 HEADERS += \
     colorpickerdialog.h \
+    globals.h \
     guitarscales.h \
-    guitarwidget.h
+    guitarwidget.h \
+    scalefilereader.h
 
 FORMS += \
     colorpickerdialog.ui \
@@ -27,3 +30,8 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Resources.qrc
+
+DISTFILES +=

@@ -11,6 +11,15 @@ GuitarScales::GuitarScales(QWidget *parent)
     ui->gridLayout->addWidget(gw);
 
     on_bSet_clicked();
+
+    qDebug() << Globals.scaleNames;
+    foreach (QString name, Globals.scaleNames) {
+        ui->cbMode->addItem(name);
+    }
+
+    foreach(auto a, Globals.scaleIntervals) {
+        qDebug() << a;
+    }
 }
 
 GuitarScales::~GuitarScales()
@@ -20,28 +29,12 @@ GuitarScales::~GuitarScales()
 
 void GuitarScales::on_bSet_clicked()
 {
-    ScaleType type;
     QString note;
 
     ui->lScaleName->setText(ui->cbNote->currentText() + " " + ui->cbMode->currentText());
 
-    QString strType = ui->cbMode->currentText();
-    if(strType == "Major") type = ScaleType::Major;
-    else if(strType == "Minor") type = ScaleType::Minor;
-    else if(strType == "Melodic Minor") type = ScaleType::MelodicMinor;
-    else if(strType == "Pentatonic Major") type = ScaleType::PentatonicMajor;
-    else if(strType == "Pentatonic Minor") type = ScaleType::PentatonicMinor;
-    else if(strType == "Diminished") type = ScaleType::Diminished;
-    else if(strType == "Phrygian") type = ScaleType::Phrygian;
-    else if(strType == "Lydian") type = ScaleType::Lydian;
-    else if(strType == "Lydian Augmented") type = ScaleType::LydianAugmented;
-    else if(strType == "Lydian Minor") type = ScaleType::LydianMinor;
-    else if(strType == "Lydian Diminished") type = ScaleType::LydianDiminished;
-    else if(strType == "Chromatic") type = ScaleType::Chromatic;
-
     note = ui->cbNote->currentText();
-
-    gw->setScale(note, type);
+    gw->setScale(note, ui->cbMode->currentText());
 }
 
 void GuitarScales::on_cbScaleDegrees_stateChanged(int arg1)

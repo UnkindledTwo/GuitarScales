@@ -5,69 +5,62 @@ GuitarWidget::GuitarWidget(QWidget *parent)
 {
     this->setMinimumSize(QSize(840, 240));
     notesToDraw = {"C", "B", "A", "D", "E", "F", "G"};
+
+    majorScale = {0, 2, 4, 5, 7, 9, 11};
 }
 
-void GuitarWidget::setScale(QString note, ScaleType type)
+void GuitarWidget::setScale(QString note, QString name)
 {
+    if(name == "") return;
     notesToDraw.clear();
 
-    int start = notes.indexOf(note);
     QVector<int> formula = {};
 
-    //Major
-    QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-    int majorStart = notes.indexOf(note);
-    QVector<QString> majorScale = {};
+    qDebug() << name;
+    qDebug() << Globals.scaleNames.indexOf(name);
 
-    foreach (int i, majorFormula) {
-        majorScale.append(notes[majorStart % 12]);
-        majorStart += i;
+    intervals = Globals.scaleIntervals[Globals.scaleNames.indexOf(name)];
+    foreach (QString interval, Globals.scaleIntervals[Globals.scaleNames.indexOf(name)]) {
+        qDebug() << interval;
+        if (interval.startsWith('b')) {
+            interval = interval.remove(0, 1);
+            notesToDraw.append(notes[(majorScale[interval.toInt() - 1] + notes.indexOf(note) - 1) % 12]);
+        }
+        else if(interval.startsWith('#')) {
+            interval = interval.remove(0, 1);
+            notesToDraw.append(notes[(majorScale[interval.toInt() - 1] + notes.indexOf(note) + 1) % 12]);
+        }
+        else {
+            notesToDraw.append(notes[(majorScale[interval.toInt() - 1] + notes.indexOf(note)) % 12]);
+        }
+
     }
-
-    majorScale.append(notes[majorStart % 12]);
+/*
 
     //Minor
     int minorStart = notes.indexOf(note);
-    QVector<QString> minorScale = {};
+    QVector<int> minorScale = {};
 
     QVector<int> minorformula = {2, 1, 2, 2, 1, 2};
 
     foreach (int i, minorformula) {
-        minorScale.append(notes[minorStart % 12]);
+        minorScale.append(minorStart % 12);
         minorStart += i;
     }
 
-    minorScale.append(notes[minorStart % 12]);
+    minorScale.append(minorStart % 12);
 
 
     switch (type) {
     case ScaleType::Major:
-        notesToDraw = majorScale;
-        /*
-        formula = {2, 2, 1, 2, 2, 2};
-        intervals = {"1", "2", "3", "4", "5", "6", "7"};
-
-        foreach (int i, formula) {
-            notesToDraw.append(notes[start % 12]);
-            start += i;
+        foreach (int i, majorScale) {
+            notesToDraw.append(notes[i]);
         }
-
-        notesToDraw.append(notes[start % 12]);
-        */
         break;
     case ScaleType::Minor:
-        notesToDraw = minorScale;
-        /*
-        formula = {2, 1, 2, 2, 1, 2};
-        intervals = {"1", "2", "b3", "4", "5", "b6", "b7"};
-
-        foreach (int i, formula) {
-            notesToDraw.append(notes[start % 12]);
-            start += i;
+        foreach (int i, minorScale) {
+            notesToDraw.append(notes[i]);
         }
-
-        notesToDraw.append(notes[start % 12]);
-        */
         break;
     case ScaleType::MelodicMinor:{
         intervals = {"1", "2", "b3", "4", "5", "b6", "b7"};
@@ -96,21 +89,21 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     case ScaleType::PentatonicMajor:{
         intervals = {"1", "2", "3", "5", "6"};
 
-        notesToDraw.append(majorScale[0]);
-        notesToDraw.append(majorScale[1]);
-        notesToDraw.append(majorScale[2]);
-        notesToDraw.append(majorScale[4]);
-        notesToDraw.append(majorScale[5]);
+        notesToDraw.append(notes[majorScale[0]]);
+        notesToDraw.append(notes[majorScale[1]]);
+        notesToDraw.append(notes[majorScale[2]]);
+        notesToDraw.append(notes[majorScale[4]]);
+        notesToDraw.append(notes[majorScale[5]]);
         break;
     }
     case ScaleType::PentatonicMinor:{
         intervals = {"1", "b3", "p4", "p5", "b7"};
 
-        notesToDraw.append(minorScale[0]);
-        notesToDraw.append(minorScale[2]);
-        notesToDraw.append(minorScale[3]);
-        notesToDraw.append(minorScale[4]);
-        notesToDraw.append(minorScale[6]);
+        notesToDraw.append(notes[minorScale[0]]);
+        notesToDraw.append(notes[minorScale[1]]);
+        notesToDraw.append(notes[minorScale[2]]);
+        notesToDraw.append(notes[minorScale[4]]);
+        notesToDraw.append(notes[minorScale[5]]);
         break;
     }
     case ScaleType::Diminished: {
@@ -127,17 +120,6 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     case ScaleType::Phrygian: {
         intervals = {"1", "b2", "b3", "4", "5", "b6", "b7"};
 
-        QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-        int majorStart = notes.indexOf(note);
-        QVector<int> majorScale = {};
-
-        foreach (int i, majorFormula) {
-            majorScale.append(majorStart % 12);
-            majorStart += i;
-        }
-
-        majorScale.append(majorStart % 12);
-
         notesToDraw.append(notes[majorScale[0] % 12]);
         notesToDraw.append(notes[(majorScale[1] - 1) % 12]);
         notesToDraw.append(notes[(majorScale[2] - 1) % 12]);
@@ -149,17 +131,6 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     }
     case ScaleType::Lydian: {
         intervals = {"1", "2", "3", "#4", "5", "6", "7"};
-
-        QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-        int majorStart = notes.indexOf(note);
-        QVector<int> majorScale = {};
-
-        foreach (int i, majorFormula) {
-            majorScale.append(majorStart % 12);
-            majorStart += i;
-        }
-
-        majorScale.append(majorStart % 12);
 
         notesToDraw.append(notes[majorScale[0] % 12]);
         notesToDraw.append(notes[(majorScale[1]) % 12]);
@@ -173,17 +144,6 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     case ScaleType::LydianAugmented: {
         intervals = {"1", "2", "3", "#4", "#5", "6", "7"};
 
-        QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-        int majorStart = notes.indexOf(note);
-        QVector<int> majorScale = {};
-
-        foreach (int i, majorFormula) {
-            majorScale.append(majorStart % 12);
-            majorStart += i;
-        }
-
-        majorScale.append(majorStart % 12);
-
         notesToDraw.append(notes[majorScale[0] % 12]);
         notesToDraw.append(notes[(majorScale[1]) % 12]);
         notesToDraw.append(notes[(majorScale[2]) % 12]);
@@ -196,17 +156,6 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     case ScaleType::LydianMinor: {
         intervals = {"1", "2", "3", "#4", "5", "b6", "b7"};
 
-        QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-        int majorStart = notes.indexOf(note);
-        QVector<int> majorScale = {};
-
-        foreach (int i, majorFormula) {
-            majorScale.append(majorStart % 12);
-            majorStart += i;
-        }
-
-        majorScale.append(majorStart % 12);
-
         notesToDraw.append(notes[majorScale[0] % 12]);
         notesToDraw.append(notes[(majorScale[1]) % 12]);
         notesToDraw.append(notes[(majorScale[2]) % 12]);
@@ -218,17 +167,6 @@ void GuitarWidget::setScale(QString note, ScaleType type)
     }
     case ScaleType::LydianDiminished: {
         intervals = {"1", "2", "b3", "#4", "5", "6", "7"};
-
-        QVector<int> majorFormula = {2, 2, 1, 2, 2, 2};
-        int majorStart = notes.indexOf(note);
-        QVector<int> majorScale = {};
-
-        foreach (int i, majorFormula) {
-            majorScale.append(majorStart % 12);
-            majorStart += i;
-        }
-
-        majorScale.append(majorStart % 12);
 
         notesToDraw.append(notes[majorScale[0] % 12]);
         notesToDraw.append(notes[(majorScale[1]) % 12]);
@@ -249,7 +187,7 @@ void GuitarWidget::setScale(QString note, ScaleType type)
         }
         break;
     }
-
+*/
     this->repaint();
 }
 

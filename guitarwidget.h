@@ -9,23 +9,10 @@
 #include <QVector>
 #include <QColor>
 
+#include "globals.h"
+
 #define FRET_COUNT 26
 #define STRING_COUNT 6
-
-enum ScaleType {
-    Major,
-    Minor,
-    MelodicMinor,
-    PentatonicMinor,
-    PentatonicMajor,
-    Diminished,
-    Phrygian,
-    Lydian,
-    LydianMinor,
-    LydianAugmented,
-    LydianDiminished,
-    Chromatic,
-};
 
 class GuitarWidget : public QWidget
 {
@@ -33,13 +20,14 @@ class GuitarWidget : public QWidget
 public:
     explicit GuitarWidget(QWidget *parent = nullptr);
 
-    void setScale(QString note, ScaleType type);
+    void setScale(QString note, QString name);
 
     bool showIntervals = false;
 
     QColor highlightNoteColor = QColor("#B19CD9");
     QColor noteColor = QColor("#C0C0C0");
 
+    QString scaleName = "Major";
 protected:
     void paintEvent(QPaintEvent*);
 signals:
@@ -56,6 +44,7 @@ private:
     QString noteFromLocation(int fret, int string);
     QVector<QPoint> locationFromNote(QString note);
 
+    QVector<int> majorScale;
 };
 
 #endif // GUITARWIDGET_H

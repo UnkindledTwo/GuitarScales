@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "colorpickerdialog.h"
 #include "guitarwidget.h"
+#include "globals.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GuitarScales; }

@@ -18,68 +18,7 @@
     <item row="2" column="0">
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="1">
-       <widget class="QComboBox" name="cbMode">
-        <item>
-         <property name="text">
-          <string>Major</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Minor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Melodic Minor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Pentatonic Major</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Pentatonic Minor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Diminished</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Phrygian</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lydian</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lydian Augmented</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lydian Minor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Lydian Diminished</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Chromatic</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QComboBox" name="cbMode"/>
       </item>
       <item row="0" column="0">
        <widget class="QComboBox" name="cbNote">

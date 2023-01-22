@@ -32,6 +32,7 @@ public:
     QColor noteColor = QColor("#C0C0C0");
 
     QString scaleName = "Major";
+    QString scaleNote = "A";
 
     QVector<QString> ignoredIntervals = {};
 protected:

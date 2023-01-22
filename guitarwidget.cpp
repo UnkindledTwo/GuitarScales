@@ -12,6 +12,9 @@ GuitarWidget::GuitarWidget(QWidget *parent)
 void GuitarWidget::setScale(QString note, QString name)
 {
     if(name == "") return;
+    this->scaleName = name;
+    this->scaleNote = note;
+
     m_name = name;
     m_note = note;
     notesToDraw.clear();
@@ -131,6 +134,9 @@ void GuitarWidget::paintEvent(QPaintEvent *e)
         else {
             painter.setBrush(noteColor);
         }
+        QColor bColor = painter.brush().color();
+        QColor bColorInv = QColor::fromRgb(255 - bColor.red(), 255 - bColor.green(), 255 - bColor.blue());
+        painter.setPen(bColorInv);
         foreach (QPoint p, locationFromNote(notesToDraw[i])) {
             //drawNote(noteRect(p.x(), p.y(), fret_width, fret_height, FRETBOARD_PADDING), notesToDraw[i], painter);
             drawNote(p.x(), p.y(), fret_width, fret_height, FRETBOARD_PADDING, notesToDraw[i], painter);

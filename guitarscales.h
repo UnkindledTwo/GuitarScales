@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QCheckBox>
+#include <QSettings>
+
 #include "colorpickerdialog.h"
 #include "guitarwidget.h"
 #include "globals.h"
@@ -34,6 +36,7 @@ private slots:
 
 private:
     Ui::GuitarScales *ui;
+    QSettings settings;
 
     QVector<QCheckBox*> intervalBoxes;
 

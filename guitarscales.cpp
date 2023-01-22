@@ -10,8 +10,6 @@ GuitarScales::GuitarScales(QWidget *parent)
 
     ui->gridLayout->addWidget(gw);
 
-    on_bSet_clicked();
-
     qDebug() << Globals.scaleNames;
     foreach (QString name, Globals.scaleNames) {
         ui->cbMode->addItem(name);
@@ -20,10 +18,30 @@ GuitarScales::GuitarScales(QWidget *parent)
     foreach(auto a, Globals.scaleIntervals) {
         qDebug() << a;
     }
+
+    gw->noteColor = QColor(settings.value("noteColor", "#C0C0C0").toString());
+    gw->highlightNoteColor = QColor(settings.value("highlightNoteColor", "#B19CD9").toString());
+    //gw->setScale(settings.value("note", "A").toString(), settings.value("name", "Major").toString());
+    ui->cbNote->setCurrentText(settings.value("note", "A").toString());
+    ui->cbMode->setCurrentText(settings.value("name", "Major").toString());
+    ui->cbScaleDegrees->setChecked(settings.value("showIntervals", false).toBool());
+    on_bSet_clicked();
+    gw->repaint();
+
+    //QColor highlightNoteColor = QColor("#B19CD9");
+    //QColor noteColor = QColor("#C0C0C0");
 }
 
 GuitarScales::~GuitarScales()
 {
+    settings.setValue("noteColor", gw->noteColor.name());
+    settings.setValue("highlightNoteColor", gw->highlightNoteColor.name());
+
+    settings.setValue("name", gw->scaleName);
+    settings.setValue("note", gw->scaleNote);
+
+    settings.setValue("showIntervals", ui->cbScaleDegrees->isChecked());
+
     delete ui;
 }
 

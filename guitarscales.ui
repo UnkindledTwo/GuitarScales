@@ -20,7 +20,7 @@
       <item row="0" column="2">
        <widget class="QCheckBox" name="cbScaleDegrees">
         <property name="text">
-         <string>Show Intervals</string>
+         <string>Show Intervals:</string>
         </property>
        </widget>
       </item>

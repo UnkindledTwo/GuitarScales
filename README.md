@@ -17,3 +17,7 @@ Create scales.json in the same directory as the executable.
     }
 ]
 ```
+
+![Preview](Resources/scale.png)
+![Preview](Resources/scale1.png)
+![Preview](Resources/scale2.png)

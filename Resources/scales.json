@@ -30,5 +30,26 @@
     {
     "Name": "Dorian",
     "Intervals": ["1", "2", "b3", "4", "5", "6", "b7"]
-    }
+	},	
+    {
+	"Name": "Phrygian",
+	"Intervals": ["1", "b2", "b3", "4", "5", "b6", "b7"]
+	},
+	{
+	"Name": "Phrygian Dominant",
+	"Intervals": ["1", "b2", "3", "4", "5", "b6", "b7"]
+	},
+	{
+	"Name": "Byzantine",
+	"Intervals": ["1", "b2", "3", "4", "5", "b6", "7"]
+	},
+	{
+	"Name": "Tritone",
+	"Intervals": ["1", "b2", "3", "b5", "5", "b7"]
+	},
+	{
+	"Name": "Locrian",
+	"Intervals": ["1", "b2", "b3","b4", "b5", "b6", "b7"]
+	}
+
 ]

@@ -2,6 +2,7 @@
 #define GUITARSCALES_H
 
 #include <QMainWindow>
+#include <QCheckBox>
 #include "colorpickerdialog.h"
 #include "guitarwidget.h"
 #include "globals.h"
@@ -29,8 +30,12 @@ private slots:
 
     void on_actionSet_Colors_triggered();
 
+    void intervalBoxChecked(bool state);
+
 private:
     Ui::GuitarScales *ui;
+
+    QVector<QCheckBox*> intervalBoxes;
 
     GuitarWidget *gw;
 };

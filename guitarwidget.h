@@ -21,6 +21,10 @@ public:
     explicit GuitarWidget(QWidget *parent = nullptr);
 
     void setScale(QString note, QString name);
+    void refresh();
+
+    QVector<QString> notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    QVector<QString> intervals = {};
 
     bool showIntervals = false;
 
@@ -28,13 +32,13 @@ public:
     QColor noteColor = QColor("#C0C0C0");
 
     QString scaleName = "Major";
+
+    QVector<QString> ignoredIntervals = {};
 protected:
     void paintEvent(QPaintEvent*);
 signals:
 
 private:
-    QVector<QString> notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
-    QVector<QString> intervals = {};
     int strings[6] = {7, 2, 10, 5, 0, 7};
 
     QVector<QString> notesToDraw = {};
@@ -45,6 +49,9 @@ private:
     QVector<QPoint> locationFromNote(QString note);
 
     QVector<int> majorScale;
+
+    QString m_note;
+    QString m_name;
 };
 
 #endif // GUITARWIDGET_H
